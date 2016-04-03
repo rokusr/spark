@@ -24,6 +24,7 @@ public interface SparkServer {
      * @param maxThreads                 - max nbr of threads.
      * @param minThreads                 - min nbr of threads.
      * @param threadIdleTimeoutMillis    - idle timeout (ms).
+     * @param enableServerJMX            - true if the server should expose JMX counters
      * @param webSocketHandlers          - web socket handlers.
      * @param webSocketIdleTimeoutMillis - Optional WebSocket idle timeout (ms).
      */
@@ -36,6 +37,7 @@ public interface SparkServer {
                 int maxThreads,
                 int minThreads,
                 int threadIdleTimeoutMillis,
+                boolean enableServerJMX,
                 Map<String, Class<?>> webSocketHandlers,
                 Optional<Integer> webSocketIdleTimeoutMillis);
 

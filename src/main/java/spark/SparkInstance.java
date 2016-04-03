@@ -57,6 +57,7 @@ final class SparkInstance extends Routable {
     protected int maxThreads = -1;
     protected int minThreads = -1;
     protected int threadIdleTimeoutMillis = -1;
+    protected boolean enableServerJMX = false;
     protected Optional<Integer> webSocketIdleTimeoutMillis = Optional.empty();
 
     protected SparkServer server;
@@ -110,6 +111,15 @@ final class SparkInstance extends Routable {
         }
         this.port = port;
     }
+
+    /**
+     * Set whether to enable the underlying server's JMX counters
+     * @param enableServerJMX true is underlying server should expose JMX counters
+     */
+    public synchronized void enableServerJMX(boolean enableServerJMX) {
+        this.enableServerJMX = enableServerJMX;
+    }
+
 
     /**
      * Set the port that Spark should listen on. If not called the default port
@@ -348,6 +358,7 @@ final class SparkInstance extends Routable {
                             maxThreads,
                             minThreads,
                             threadIdleTimeoutMillis,
+                            enableServerJMX,
                             webSocketHandlers,
                             webSocketIdleTimeoutMillis);
                 }).start();
