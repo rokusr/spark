@@ -966,6 +966,14 @@ public class Spark {
     }
 
     /**
+     * Enables embedded server JMX counters
+     * @param enabled set to true to enable embedded server's JMX beans
+     */
+    public static void enableServerJMX(boolean enabled) {
+        getInstance().enableServerJMX(enabled);
+    }
+
+    /**
      * Sets the folder in classpath serving static files. Observe: this method
      * must be called before all other methods.
      * -

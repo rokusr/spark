@@ -9,7 +9,7 @@
     <groupId>com.sparkjava</groupId>
     <artifactId>spark-core</artifactId>
     <packaging>bundle</packaging>
-    <version>2.5</version>
+    <version>2.5-jmx</version>
     <name>Spark</name>
     <description>A Sinatra inspired java web framework</description>
     <url>http://www.sparkjava.com</url>
@@ -74,6 +74,12 @@
             <artifactId>websocket-servlet</artifactId>
             <version>${jetty.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-jmx</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
+
 
         <!-- JUNIT DEPENDENCY FOR TESTING -->
         <dependency>

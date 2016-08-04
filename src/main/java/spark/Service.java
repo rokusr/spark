@@ -66,6 +66,8 @@ public final class Service extends Routable {
     protected int threadIdleTimeoutMillis = -1;
     protected Optional<Integer> webSocketIdleTimeoutMillis = Optional.empty();
 
+    protected boolean enableServerJMX = false;
+
     protected EmbeddedServer server;
     protected Routes routes;
 
@@ -190,6 +192,15 @@ public final class Service extends Routable {
 
         return this;
     }
+
+    /**
+     * Set whether to enable the underlying server's JMX counters
+     * @param enableServerJMX true is underlying server should expose JMX counters
+     */
+    public synchronized void enableServerJMX(boolean enableServerJMX) {
+        this.enableServerJMX = enableServerJMX;
+    }
+
 
     /**
      * Sets the folder in classpath serving static files. Observe: this method
@@ -353,7 +364,8 @@ public final class Service extends Routable {
                             latch,
                             maxThreads,
                             minThreads,
-                            threadIdleTimeoutMillis);
+                            threadIdleTimeoutMillis,
+                            enableServerJMX);
                 }).start();
             }
             initialized = true;
