@@ -57,6 +57,7 @@ final class SparkInstance extends Routable {
     protected int maxThreads = -1;
     protected int minThreads = -1;
     protected int threadIdleTimeoutMillis = -1;
+    protected int maxQueueCapacity = -1;
     protected boolean enableServerJMX = false;
     protected Optional<Integer> webSocketIdleTimeoutMillis = Optional.empty();
 
@@ -207,6 +208,18 @@ final class SparkInstance extends Routable {
      * @param idleTimeoutMillis thread idle timeout (ms).
      */
     public synchronized void threadPool(int maxThreads, int minThreads, int idleTimeoutMillis) {
+        threadPool(maxThreads, minThreads, idleTimeoutMillis, -1);
+    }
+
+    /**
+     * Configures the embedded web server's thread pool.
+     *
+     * @param maxThreads        max nbr of threads.
+     * @param minThreads        min nbr of threads.
+     * @param idleTimeoutMillis thread idle timeout (ms).
+     * @param maxQueueCapacity  max capacity of connection queue
+     */
+    public synchronized void threadPool(int maxThreads, int minThreads, int idleTimeoutMillis, int maxQueueCapacity) {
         if (initialized) {
             throwBeforeRouteMappingException();
         }
@@ -214,7 +227,9 @@ final class SparkInstance extends Routable {
         this.maxThreads = maxThreads;
         this.minThreads = minThreads;
         this.threadIdleTimeoutMillis = idleTimeoutMillis;
+        this.maxQueueCapacity = maxQueueCapacity;
     }
+
 
     /**
      * Sets the folder in classpath serving static files. Observe: this method
@@ -358,6 +373,7 @@ final class SparkInstance extends Routable {
                             maxThreads,
                             minThreads,
                             threadIdleTimeoutMillis,
+                            maxQueueCapacity,
                             enableServerJMX,
                             webSocketHandlers,
                             webSocketIdleTimeoutMillis);

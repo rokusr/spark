@@ -73,6 +73,7 @@ public class JettySparkServer implements SparkServer {
                        int maxThreads,
                        int minThreads,
                        int threadIdleTimeoutMillis,
+                       int maxQueueCapacity,
                        boolean enableServerJMX,
                        Map<String, Class<?>> webSocketHandlers,
                        Optional<Integer> webSocketIdleTimeoutMillis) {
@@ -86,7 +87,7 @@ public class JettySparkServer implements SparkServer {
             }
         }
 
-        server = JettyServerFactory.createServer(maxThreads, minThreads, threadIdleTimeoutMillis, enableServerJMX);
+        server = JettyServerFactory.createServer(maxThreads, minThreads, threadIdleTimeoutMillis, maxQueueCapacity, enableServerJMX);
 
         ServerConnector connector;
 
