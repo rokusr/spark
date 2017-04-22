@@ -953,6 +953,18 @@ public final class Spark {
     }
 
     /**
+     * Configures the embedded web server's thread pool.
+     *
+     * @param maxThreads        max nbr of threads.
+     * @param minThreads        min nbr of threads.
+     * @param idleTimeoutMillis thread idle timeout (ms).
+     * @param maxQueueCapacity  max capacity of connection queue
+     */
+    public static void threadPool(int maxThreads, int minThreads, int idleTimeoutMillis, int maxQueueCapacity) {
+        getInstance().threadPool(maxThreads, minThreads, idleTimeoutMillis, maxQueueCapacity);
+    }
+
+    /**
      * Enables embedded server JMX counters
      * @param enabled set to true to enable embedded server's JMX beans
      */
